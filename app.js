@@ -8,17 +8,12 @@ let suggestions = document.querySelector('.suggestions');
 let data = [];
 
 
-const api_Url = "http://localhost:3000/restaurants";
+const api_Url = "https://snigdha-chowdhury.github.io/Bongo/restaurant.json";
 async function getResto() {
     const response = await fetch(api_Url);
     data = await response.json();
     console.log(data);
     displayData(data);
-
-
-    // console.log(data.sort(function (a, b) {
-    //     return b.restaurant.user_rating.aggregate_rating - a.restaurant.user_rating.aggregate_rating;
-    //   }))
 };
 
 window.onload = getResto();
@@ -41,8 +36,6 @@ function displayData(data) {
 //Search restaurants
 restaurantSearch.addEventListener('keyup', (event) => {
     let userSearchText = event.target.value.toLowerCase();
-
-    // console.log(data);
     suggestions.innerHTML = '';
     let suggestionResto = data.filter(elt => {
         return elt.restaurant.name.toLowerCase().startsWith(userSearchText) || elt.restaurant.cuisines.toLowerCase().startsWith(userSearchText);
@@ -55,9 +48,6 @@ restaurantSearch.addEventListener('keyup', (event) => {
     if (userSearchText == '') {
         suggestions.innerHTML = '';
     }
-
-
-
 
     let filteredResto = data.filter(elt => {
         return elt.restaurant.name.toLowerCase().includes(userSearchText) || elt.restaurant.cuisines.toLowerCase().includes(userSearchText);
@@ -95,26 +85,24 @@ restaurantFavorites.addEventListener('click', (e) => {
     }
 
 });
-
-
-console.log(JSON.parse(localStorage.getItem('favorites')));
+// console.log(JSON.parse(localStorage.getItem('favorites')));
 
 
 // sort restaurant 
 function sortRestaurantByRating() {
     let optionSelected = restaurantSort.value;
-    console.log(optionSelected);
+    // console.log(optionSelected);
     if (optionSelected === 'rating') {
         let restaurantSortedByRating = data.sort(function (a, b) {
             return b.restaurant.user_rating.aggregate_rating - a.restaurant.user_rating.aggregate_rating;
         });
-        console.log(restaurantSortedByRating);
+        // console.log(restaurantSortedByRating);
         displayData(restaurantSortedByRating);
     }else if (optionSelected === 'name') {
         let restaurantSortedByName = data.sort((a,b) => {
             return a.restaurant.name.localeCompare(b.restaurant.name);
         });
-        console.log(restaurantSortedByName);
+        // console.log(restaurantSortedByName);
         displayData(restaurantSortedByName);
     }
 }
