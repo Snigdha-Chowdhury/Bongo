@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bongo</title>
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
@@ -16,22 +15,32 @@
             <h1> Bongo Food Ordering</h1>
         </div>
         <br>
-        <div class="content">
-            <div>
-                <input id="restaurantSearch" type="text" name="search" placeholder="Search restaurant,cuisines.."> 
+        <div class="content row ">
+            <div class="col-8">
+                <input id="restaurantSearch" type="text" name="search" placeholder="Search restaurant,cuisines..">
+                <div class="suggestions"></div>
             </div>
-            <div id="restaurantSort">
-                
+
+            <div class="col-2">
+                <select id="restaurantSort" onchange="sortRestaurantByRating()">
+                    <option value="">Sort By</option>
+                    <option value="rating">Rating</option>
+                    <option value="name">Name</option>
+                </select>
             </div>
-            <ul id="restaurantList"></ul>
+
+            <div class="col-2">
+                <button id="restaurantFavorites">Favorites</button>
+                <ul id="restaurantFavoritesShow"></ul>
+            </div>
+           <div class="conatiner"><ul id="restaurantList"></ul></div>
+            
         </div>
         <div class="footer">
             <h5>Developed By : </h5>
         </div>
-
     </div>
     <script src="app.js"></script>
 </body>
 
 </html>
-
