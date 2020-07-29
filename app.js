@@ -7,11 +7,12 @@ let suggestions = document.querySelector('.suggestions');
 
 let data = [];
 
-
-const api_Url = "https://snigdha-chowdhury.github.io/Bongo/restaurant.json";
+//const api_Url = "http://localhost:3000/restaurants";
+ const api_Url = "https://snigdha-chowdhury.github.io/Bongo/restaurant.json";
 async function getResto() {
     const response = await fetch(api_Url);
     data = await response.json();
+    data = data.restaurants;
     console.log(data);
     displayData(data);
 };
