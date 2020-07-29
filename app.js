@@ -12,9 +12,9 @@ let data = [];
 async function getResto() {
     const response = await fetch(api_Url);
     data = await response.json();
-    data = data.restaurants;
-    console.log(data);
-    displayData(data);
+    // data = data.restaurants;
+    console.log(data.restaurants);
+    displayData(data.restaurants);
 };
 
 window.onload = getResto();
@@ -38,7 +38,7 @@ function displayData(data) {
 restaurantSearch.addEventListener('keyup', (event) => {
     let userSearchText = event.target.value.toLowerCase();
     suggestions.innerHTML = '';
-    let suggestionResto = data.filter(elt => {
+    let suggestionResto = data.restaurants.filter(elt => {
         return elt.restaurant.name.toLowerCase().startsWith(userSearchText) || elt.restaurant.cuisines.toLowerCase().startsWith(userSearchText);
     });
     suggestionResto.forEach(item => {
@@ -50,7 +50,7 @@ restaurantSearch.addEventListener('keyup', (event) => {
         suggestions.innerHTML = '';
     }
 
-    let filteredResto = data.filter(elt => {
+    let filteredResto = data.restaurants.filter(elt => {
         return elt.restaurant.name.toLowerCase().includes(userSearchText) || elt.restaurant.cuisines.toLowerCase().includes(userSearchText);
     })
     displayData(filteredResto);
@@ -94,13 +94,13 @@ function sortRestaurantByRating() {
     let optionSelected = restaurantSort.value;
     // console.log(optionSelected);
     if (optionSelected === 'rating') {
-        let restaurantSortedByRating = data.sort(function (a, b) {
+        let restaurantSortedByRating = data.restaurants.sort(function (a, b) {
             return b.restaurant.user_rating.aggregate_rating - a.restaurant.user_rating.aggregate_rating;
         });
         // console.log(restaurantSortedByRating);
         displayData(restaurantSortedByRating);
     }else if (optionSelected === 'name') {
-        let restaurantSortedByName = data.sort((a,b) => {
+        let restaurantSortedByName = data.restaurants.sort((a,b) => {
             return a.restaurant.name.localeCompare(b.restaurant.name);
         });
         // console.log(restaurantSortedByName);
