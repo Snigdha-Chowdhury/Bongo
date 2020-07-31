@@ -7,8 +7,11 @@ let suggestions = document.querySelector('.suggestions');
 
 let data = [];
 
+
+
+/**************************************************Get Restaurants From API*****************************************/
 //const api_Url = "http://localhost:3000/restaurants";
- const api_Url = "https://snigdha-chowdhury.github.io/Bongo/restaurant.json";
+const api_Url = "https://snigdha-chowdhury.github.io/Bongo/restaurant.json";
 async function getResto() {
     const response = await fetch(api_Url);
     data = await response.json();
@@ -18,8 +21,11 @@ async function getResto() {
 };
 
 window.onload = getResto();
+/**********************************************************************************************************/
 
-//show restaurants
+
+
+/************************************************Show Restaurants*******************************************/
 function displayData(data) {
     const htmlString = data.map((data) => {
         return `<li class="element">
@@ -33,8 +39,11 @@ function displayData(data) {
     }).join('');
     restaurantList.innerHTML = htmlString;
 }
+/**********************************************************************************************************/
 
-//Search restaurants
+
+
+/**************************************Search Restaurants**************************************************/
 restaurantSearch.addEventListener('keyup', (event) => {
     let userSearchText = event.target.value.toLowerCase();
     suggestions.innerHTML = '';
@@ -49,15 +58,18 @@ restaurantSearch.addEventListener('keyup', (event) => {
     if (userSearchText == '') {
         suggestions.innerHTML = '';
     }
+    suggestions.classList.add('suggestionOverlay');
 
     let filteredResto = data.restaurants.filter(elt => {
         return elt.restaurant.name.toLowerCase().includes(userSearchText) || elt.restaurant.cuisines.toLowerCase().includes(userSearchText);
     })
     displayData(filteredResto);
 });
+/**********************************************************************************************************/
 
 
-//favorite restaurants
+
+/*****************************************Favorite Restaurants*********************************************/
 let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 function fav(name) {
     let index = favorites.indexOf(name);
@@ -78,18 +90,35 @@ restaurantFavorites.addEventListener('click', (e) => {
         restaurantFavoritesShow.innerHTML = '';
         showFavorites.forEach(elt => {
             let li = document.createElement('li');
-            li.innerHTML = elt;
+            li.className = "favoriteList";
+            li.innerHTML = elt + `<button class="btn" onClick="removeFavorites('${elt}')" > X </button>`;
             restaurantFavoritesShow.appendChild(li);
+
         })
-    } else {
+    }
+    else {
         restaurantFavoritesShow.style.display = 'none';
     }
 
-});
-// console.log(JSON.parse(localStorage.getItem('favorites')));
+})
+console.log(JSON.parse(localStorage.getItem('favorites')));
+//${showFavorites.indexOf(elt)}
 
 
-// sort restaurant 
+function removeFavorites(item) {
+
+    let fav = JSON.parse(localStorage.getItem('favorites'));
+    let index = fav.indexOf(item);
+    console.log(index);
+    fav.splice(index, 1);
+    localStorage.setItem('favorites', JSON.stringify(fav));
+
+}
+/**********************************************************************************************************/
+
+
+
+/* ****************************************************Sort Restaurant************************************ */
 function sortRestaurantByRating() {
     let optionSelected = restaurantSort.value;
     // console.log(optionSelected);
@@ -99,14 +128,13 @@ function sortRestaurantByRating() {
         });
         // console.log(restaurantSortedByRating);
         displayData(restaurantSortedByRating);
-    }else if (optionSelected === 'name') {
-        let restaurantSortedByName = data.restaurants.sort((a,b) => {
+    } else if (optionSelected === 'name') {
+        let restaurantSortedByName = data.restaurants.sort((a, b) => {
             return a.restaurant.name.localeCompare(b.restaurant.name);
         });
         // console.log(restaurantSortedByName);
         displayData(restaurantSortedByName);
     }
 }
-
-
+/**********************************************************************************************************/
 
