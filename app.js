@@ -9,7 +9,7 @@ let data = [];
 
 
 
-/**************************************************Get Restaurants From API*****************************************/
+/********************************************Get Restaurants From API****************************************/
 //const api_Url = "http://localhost:3000/restaurants";
 const api_Url = "https://snigdha-chowdhury.github.io/Bongo/restaurant.json";
 async function getResto() {
@@ -33,8 +33,8 @@ function displayData(data) {
                     <p><b>${data.restaurant.name}</b> <br>
                    ${data.restaurant.cuisines}<br>
                     Rating: ${data.restaurant.user_rating.aggregate_rating}<br>
-                    Min Cost for two: ₹${data.restaurant.average_cost_for_two}</p><br>
-                    <button style="border:2px solid black; text-align: center" class="btn btn-primary" id="favoriteItem" onClick="fav('${data.restaurant.name}')">Favorites</button>
+                    Min Cost for two: ₹${data.restaurant.average_cost_for_two}<br>
+                    <button class="btn" id="favoriteItem" onClick="fav('${data.restaurant.name}')"><i class="fa fa-heart" aria-hidden="true"></i></button></p>
                 </li>`;
     }).join('');
     restaurantList.innerHTML = htmlString;
@@ -118,7 +118,7 @@ function removeFavorites(item) {
 
 
 
-/* ****************************************************Sort Restaurant************************************ */
+/* ***************************************************Sort Restaurant**************************************/
 function sortRestaurantByRating() {
     let optionSelected = restaurantSort.value;
     // console.log(optionSelected);

@@ -6,36 +6,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bongo</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
     <div class="container">
         <div class="header row">
-           <div class="col-12"><h1>Bongo Food Ordering</h1></div> 
+            <div class="col-12">
+                <h1>Bongo Food Ordering</h1>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-8">
+                    <input id="restaurantSearch" type="text" name="search" placeholder="Search restaurant,cuisines..">
+                    <div class="suggestions"></div>
+                </div>
+
+                <div class="col-2">
+                    <select id="restaurantSort"  onchange="sortRestaurantByRating()">
+                        <option value=''>Sort By</option>
+                        <option value="rating">Rating</option>
+                        <option value="name">Name</option>
+                    </select>
+                </div>
+
+                <div class="col-2">
+                    <button id="restaurantFavorites"><i class="fa fa-heart" aria-hidden="true"></i></button>
+                    <ul id="restaurantFavoritesShow"></ul>
+                </div>
+            </div>
         </div>
         <br>
-        <div class="content row ">
-            <div class="col-8">
-                <input id="restaurantSearch" type="text" name="search" placeholder="Search restaurant,cuisines..">
-                <div class="suggestions"></div>
-            </div>
-
-            <div class="col-2">
-                <select id="restaurantSort" onchange="sortRestaurantByRating()">
-                    <option value="">Sort By</option>
-                    <option value="rating">Rating</option>
-                    <option value="name">Name</option>
-                </select>
-            </div>
-
-            <div class="col-2">
-                <button id="restaurantFavorites">Favorites</button>
-                <ul id="restaurantFavoritesShow"></ul>
-            </div>
-           <div class="conatiner"><ul id="restaurantList"></ul></div>
-            
+        <div class="container">
+            <ul id="restaurantList"></ul>
         </div>
+    </div>
+    <br>
+
+    <div class="container">
         <div class="footer">
             <h5>Developed By : </h5>
         </div>

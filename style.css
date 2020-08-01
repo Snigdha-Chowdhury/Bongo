@@ -16,6 +16,29 @@
     text-align: center;
 }
 
+select {
+   /* appearance: none; */
+   position: relative;
+   font-family: "FontAwesome","sans-serif";
+   text-align:center;
+   border: 1px solid slategray;
+   border-radius: 5px;
+   padding: 5px 10px;
+   
+  }
+
+select option {
+    text-align:center;
+    font-family: "FontAwesome","sans-serif";
+   font-size: 12px;
+   border: 1px solid slategray;
+}
+@media screen and (max-width: 600px) {
+    select{
+      width: 100%;
+      margin-top: 0;
+    }
+}
 #restaurantList {
     padding-inline-start: 0;
     display: grid;
@@ -68,6 +91,27 @@
     background-color: white;
     opacity: 1.3;
 }
+
+#restaurantFavorites{
+    padding: 5px 10px;
+    background: transparent;
+    border: 1px solid slategray;
+    border-radius: 50%;
+}
+ #favoriteItem{
+    padding: 5px 10px;
+    background: transparent;
+    text-align: center;
+    border: 1px solid slategray;
+    border-radius: 50%;
+    float: right;
+}
+
+.fa{
+    color: red;
+}
+
+
 
 #restaurantFavoritesShow {
     position: absolute;
